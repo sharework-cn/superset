@@ -1,3 +1,46 @@
+# INSTRUCTION ABOUT WORK WITH SUPERSET
+
+## Setup the local environment
+
+### Install Python dependencies
+
+* python-ldap  
+
+Downgrade the version of **python-ldap** to 3.4.0, and install the `.whl` file from [Christoph Gohlke’s page](https://www.lfd.uci.edu/~gohlke/pythonlibs/)
+
+## Front End
+
+* puppeteer  
+Set the environment variable PUPPETEER_SKIP_DOWNLOAD to true, for windows you may need to set it in **Control Panel**.
+* prettier/prettier  
+For windows, you may need to config the `prettier/prettier` as:
+
+```js
+"prettier/prettier": [
+  "error",
+  {
+    "endOfLine": "auto"
+  }
+]
+```
+
+You need to modify the config file of eslint, which file name is `.eslintrc.js`. Please be noticed that there's some **overrides** configuration.
+
+## Runtime Warnings
+
+There are some warnings when run/build the superset in development mode, it may need to be improved in production.
+
+### In-memory storage for tracking rate limits
+
+UserWarning: Using the in-memory storage for tracking rate limits as no storage was e
+xplicitly specified. This is not recommended for production use. See: https://flask-limiter.readthedocs.io#configuring-a-storage-backend for documentation about configuring the storage backend.
+
+### Performance consideration
+
+\superset\superset\commands\importers\v1\utils.py:113: SAWarning: TypeDecorator EncryptedType() will not produce a cache key because the ``cache_ok``
+attribute is not set to True.  This can have significant performance implications including some performance degradations in comparison to prior SQLAlchemy versions.  Set this attribute to True if this type object's state is safe to use in a cache key, or False to disable this warning. (Background on this error at: https://sqlalche.me/e/14/cprf)
+
+
 # SETUP - Run from source
 本文档记录了在本地开发环境及生产环境安装和运行**Superset**的步骤和问题。对于湖南财信版本，在安装和配置时有一些特别考虑。本文档中列出的步骤，不一定全部都要执行，比如如果代码已经从湖南财信GitLab中获得，则代码层面的修改就无需重复做了（这种情况被标记为`【CODE REVISION】`）。  
 如果仅关心生产环境如何安装，可以直接跳转【[此处](#生产环境安装)】
